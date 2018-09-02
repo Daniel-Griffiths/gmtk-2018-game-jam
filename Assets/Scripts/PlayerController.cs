@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject mainCamera;
     private bool shieldActive = false;
     private GameManager gameManager;
-    private bool playedWarning = false;
+    private bool playedHealthWarning = false;
+    private bool playedEnergyWarning = false;
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -43,9 +44,11 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKey("space") || Input.GetKey("joystick button 0")) {
             shieldActive = true;
             shield.SetActive(true);
+            shield.SetActive(true);
         } else {
             shieldActive = false;
             shield.SetActive(false);
+            shield.transform.position = new Vector3(1000f, 1000f, 0);
         }
 
         if (energy == 0) {
@@ -86,28 +89,38 @@ public class PlayerController : MonoBehaviour {
             energyText.color = Color.white;
         }
 
-        if (energy <= 5) {
+        if (energy < 6 && energy > 4) {
+            playedEnergyWarning = false;
             energyText.color = Color.yellow;
         }
 
-        if (energy <= 3) {
-            energyText.color = Color.red;
+        if (energy < 4) {
+            PlayEnergyWarning();
+            energyText.color = Color.red;            
         }
 
-        if (lives <= 5) {
+        if (lives < 6) {
             livesText.color = Color.yellow;
         }
 
-        if (lives <= 3) {
-            PlayWarning();
+        if (lives < 4) {
+            PlayHealthWarning();
             livesText.color = Color.red;
         }
     }
 
-    void PlayWarning() {
-        if(playedWarning == false) {
+    void PlayHealthWarning() {
+        if(playedHealthWarning == false) {
             gameManager.PlayAudio(warningSound);
-            playedWarning = true;
+            playedHealthWarning = true;
+        }
+    }
+
+    void PlayEnergyWarning()
+    {
+        if (playedEnergyWarning == false) {
+            gameManager.PlayAudio(warningSound);
+            playedEnergyWarning = true;
         }
     }
 
