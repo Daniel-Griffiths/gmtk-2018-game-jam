@@ -1,6 +1,7 @@
 ﻿using Kino;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +14,13 @@ public class GameManager : MonoBehaviour
     public AudioClip deathSound;
     public AudioClip announcerStartSound;
     public GameObject enemy;
+    public Text scoreText;
+    private int score = 0;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(announcerStartSound);
+        PlayAudio(announcerStartSound);
     }
 
     void FixedUpdate()
@@ -36,8 +39,22 @@ public class GameManager : MonoBehaviour
     void SpawnEnemies()
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length < 3) {
-            Instantiate(enemy);
+            GameObject newEnemy = Instantiate(enemy);
+            newEnemy.transform.position = new Vector2(Random.Range
+                (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x), 1f);
+
         }
+    }
+
+    public void IncreaseScore()
+    {
+        score++;
+        scoreText.text = "Enemies Destroyed: " + score.ToString();
+    }
+
+    public void PlayAudio(AudioClip audio)
+    {
+        audioSource.PlayOneShot(audio);
     }
 
     public void GameOver()

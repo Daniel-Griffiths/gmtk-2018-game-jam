@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class ShieldController : MonoBehaviour {
     private GameObject player;
+    public AudioClip shot;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        FollowPlayer();
+
+    }
+
+    void FollowPlayer()
+    {
+        // warp to the player
+        if (player == null) {
+            gameObject.SetActive(false);
+        } else {
+            transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.05f);
+        }
     }
 
     void Update()
     {
-        transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.05f);
+        FollowPlayer();
     }
 
-    void OnCollision2d(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
- 
+        Debug.Log("hit");
+        FindObjectOfType<GameManager>().PlayAudio(shot);
     }
 }

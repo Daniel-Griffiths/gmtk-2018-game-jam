@@ -35,8 +35,9 @@ public class EnemyController : MonoBehaviour {
         }
 
         // chase the player
-        float movementDistance = .1f * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementDistance);
+        float movementDistance = .2f * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, 
+           new Vector3(Random.Range(player.transform.position.x - 1f, player.transform.position.x + 1f), player.transform.position.y + .7f, player.transform.position.z), movementDistance);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -44,6 +45,7 @@ public class EnemyController : MonoBehaviour {
         if (collision.transform.tag == "Bullet" && collision.transform.GetComponent<SpriteRenderer>().color == Color.magenta) {
             health--;
             if(health <= 0) {
+                FindObjectOfType<GameManager>().IncreaseScore();
                 Destroy(gameObject);
             }
         }
