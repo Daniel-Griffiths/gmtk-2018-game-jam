@@ -5,26 +5,33 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
-    private float horizontal;
+    
+    // Gameobjects
+    private GameObject shield;
+    public GameObject mainCamera;
+    private GameManager gameManager;
+
+    // Misc
+    private Rigidbody2D rb;
     private float vertical;
-    private float speed = 1.5f;
+    private float horizontal;
     private int lives = 10;
     private int energy = 10;
+    private float speed = 1.5f;
     private int energyMax = 10;
-
-    private Rigidbody2D rb;
-    public Text livesText;
-    public Text energyText;
-    private GameObject shield;
-    AudioSource audioSource;
-    public AudioClip hitSound;
-    public AudioClip warningSound;
-    public GameObject mainCamera;
     private bool shieldActive = false;
-    private GameManager gameManager;
     private bool playedHealthWarning = false;
     private bool playedEnergyWarning = false;
 
+    // Gui
+    public Text livesText;
+    public Text energyText;
+    
+    // Audio
+    AudioSource audioSource;
+    public AudioClip hitSound;
+    public AudioClip warningSound;
+    
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();

@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public GameObject bullet;
-    public bool lookAtPlayer = false;
     private GameObject player;
-    private int health = 3;
     private GameObject shield;
-    [Header("Lower is faster")]
+
+    public int health = 3;
     public float rateOfFire = .2f;
+    public bool lookAtPlayer = false;
 
     // Use this for initialization
     void Start () {
@@ -26,28 +26,36 @@ public class EnemyController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if(player != null) {
-            Vector3 v_diff = (player.transform.position - transform.position);
-
+        if(player != null) {        
             if (lookAtPlayer) {
+                Vector3 v_diff = (player.transform.position - transform.position);
                 transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(v_diff.y, v_diff.x) * Mathf.Rad2Deg + 90f);
             }
+            FollowPlayer();
         }
-
-        // chase the player
-        float movementDistance = .2f * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, 
-           new Vector3(Random.Range(player.transform.position.x - 1f, player.transform.position.x + 1f), player.transform.position.y + .7f, player.transform.position.z), movementDistance);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // Yes, using the color is a really stupid idea
         if (collision.transform.tag == "Bullet" && collision.transform.GetComponent<SpriteRenderer>().color == Color.magenta) {
-            health--;
-            if(health <= 0) {
-                FindObjectOfType<GameManager>().IncreaseScore();
-                Destroy(gameObject);
-            }
+            DestroyEnemy();
+        }
+    }
+
+    void FollowPlayer()
+    {
+        float movementDistance = .2f * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, 
+           new Vector3(Random.Range(player.transform.position.x - 1f, player.transform.position.x + 1f), player.transform.position.y + .7f, player.transform.position.z), movementDistance);
+    }    
+
+    void DestroyEnemy()
+    {
+        health--;
+        if(health <= 0) {
+            FindObjectOfType<GameManager>().IncreaseScore();
+            Destroy(gameObject);
         }
     }
 }

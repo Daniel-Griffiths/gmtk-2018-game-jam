@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldController : MonoBehaviour {
-    private GameObject player;
     public AudioClip shot;
+    private GameObject player;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        FollowPlayer();
-
     }
 
     void FollowPlayer()
@@ -30,7 +28,6 @@ public class ShieldController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("hit");
         FindObjectOfType<GameManager>().PlayAudio(shot);
     }
 }

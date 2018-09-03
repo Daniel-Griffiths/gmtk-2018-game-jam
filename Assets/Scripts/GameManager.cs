@@ -5,17 +5,24 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private float timeSlow = 0.5f;
+    // Gameobjects
+    public GameObject menu;
+    public GameObject enemy;
     public GameObject mainCamera;
+
+    // Misc
+    private int score = 0;
+    private float timeSlow = 0.5f;
     private float restartDelay = 1.5f;
     public bool gameHasEnded = false;
-    public GameObject menu;
-    private AudioSource audioSource;
+    
+    // Audio
     public AudioClip deathSound;
+    private AudioSource audioSource;
     public AudioClip announcerStartSound;
-    public GameObject enemy;
+    
+    // GUI
     public Text scoreText;
-    private int score = 0;
 
     void Start()
     {

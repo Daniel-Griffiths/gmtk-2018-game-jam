@@ -6,20 +6,24 @@ public class BulletController : MonoBehaviour
 {
 
     private Rigidbody2D rb;
+    private string owner = "Enemy";
     private SpriteRenderer sprite;
-    public string owner = "Enemy";
+    private const int bulletCollisionLayer = 8;
+    private const float bulletLifetime = 4f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+
+        // Make the bullets red by default
         sprite.color = Color.red;
 
         // Destroy bullet after x seconds
-        Invoke("DestroyBullet", 4f);
+        Invoke("DestroyBullet", bulletLifetime);
 
         // Make sure bullets cant collide with each other
-        Physics2D.IgnoreLayerCollision(8, 8);
+        Physics2D.IgnoreLayerCollision(bulletCollisionLayer, bulletCollisionLayer);
     }
 
     void DestroyBullet()
@@ -36,8 +40,8 @@ public class BulletController : MonoBehaviour
 
         // Send the bullet back
         if (collision.transform.tag == "Shield") {
-            sprite.color = Color.magenta;
             owner = "Player";
+            sprite.color = Color.magenta;
             rb.AddForce(new Vector2(Random.Range(-5f, 5f), 50f));
         }
     }
