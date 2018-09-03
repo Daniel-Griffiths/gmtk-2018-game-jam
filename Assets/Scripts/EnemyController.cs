@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour {
     private GameObject player;
     private GameObject shield;
 
+    public Sprite[] sprites;
     public int health = 3;
     public float rateOfFire = .2f;
     public float followSpeed = .2f;
@@ -17,6 +18,12 @@ public class EnemyController : MonoBehaviour {
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player"); 
         InvokeRepeating("SpawnBullet", 0.0f, rateOfFire);
+        RandomSprite();
+    }
+
+    void RandomSprite()
+    {
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0,sprites.Length)];
     }
 
     void SpawnBullet()

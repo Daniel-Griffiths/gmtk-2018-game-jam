@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour {
     private float energyRecoverySpeed = .5f;
 
     // Gui
-    public Text livesText;
-    public Text energyText;
+    private Text livesText;
+    private Text energyText;
     
     // Audio
     AudioSource audioSource;
