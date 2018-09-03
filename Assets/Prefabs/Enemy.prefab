@@ -79,8 +79,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1751003784717582, guid: 58c499eaa3ef1da4fbf72ae17ae0f5a2, type: 2}
-  lookAtPlayer: 0
+  sprites:
+  - {fileID: 21300000, guid: fb6763b6e51d3784089030b6240d60f7, type: 3}
+  - {fileID: 21300000, guid: ab28b6c88c88da84d9f763534acddb0b, type: 3}
+  - {fileID: 21300000, guid: 2feb75c2dea800942877d5a065adef8a, type: 3}
+  health: 3
   rateOfFire: 0.2
+  followSpeed: 0.2
+  lookAtPlayer: 0
 --- !u!212 &212659947449623778
 SpriteRenderer:
   m_ObjectHideFlags: 1
