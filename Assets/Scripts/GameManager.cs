@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     // Misc
     private int score = 0;
     private float timeSlow = 0.5f;
-    private float restartDelay = 1.5f;
     public bool gameHasEnded = false;
+    private float restartDelay = 1.5f;
     
     // Audio
     public AudioClip deathSound;

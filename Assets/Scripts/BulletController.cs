@@ -8,8 +8,9 @@ public class BulletController : MonoBehaviour
     private Rigidbody2D rb;
     private string owner = "Enemy";
     private SpriteRenderer sprite;
-    private const int bulletCollisionLayer = 8;
     private const float bulletLifetime = 4f;
+    private const int bulletCollisionLayer = 8;
+    private const float bulletReflectionSpeed = 55f;
 
     void Start()
     {
@@ -42,7 +43,8 @@ public class BulletController : MonoBehaviour
         if (collision.transform.tag == "Shield") {
             owner = "Player";
             sprite.color = Color.magenta;
-            rb.AddForce(new Vector2(Random.Range(-5f, 5f), 50f));
+            // Add a random range to give the bullets a spread
+            rb.AddForce(new Vector2(Random.Range(-5f, 5f), bulletReflectionSpeed));
         }
     }
 

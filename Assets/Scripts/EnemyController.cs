@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour {
 
     public int health = 3;
     public float rateOfFire = .2f;
+    public float followSpeed = .2f;
     public bool lookAtPlayer = false;
 
     // Use this for initialization
@@ -45,7 +46,7 @@ public class EnemyController : MonoBehaviour {
 
     void FollowPlayer()
     {
-        float movementDistance = .2f * Time.deltaTime;
+        float movementDistance = followSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, 
            new Vector3(Random.Range(player.transform.position.x - 1f, player.transform.position.x + 1f), player.transform.position.y + .7f, player.transform.position.z), movementDistance);
     }    

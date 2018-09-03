@@ -16,12 +16,17 @@ public class PlayerController : MonoBehaviour {
     private float vertical;
     private float horizontal;
     private int lives = 10;
-    private int energy = 10;
+
     private float speed = 1.5f;
-    private int energyMax = 10;
     private bool shieldActive = false;
     private bool playedHealthWarning = false;
     private bool playedEnergyWarning = false;
+
+    // Energy
+    private int energy = 10;
+    private int energyMax = 10;
+    private float energyDrainSpeed = 1f;
+    private float energyRecoverySpeed = .5f;
 
     // Gui
     public Text livesText;
@@ -35,13 +40,14 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        shield = GameObject.FindGameObjectWithTag("Shield");
         gameManager = FindObjectOfType<GameManager>();
+        shield = GameObject.FindGameObjectWithTag("Shield");
+
         livesText.text = "Health: " + lives.ToString();
         energyText.text = "Energy: " + energy.ToString();
 
-        InvokeRepeating("RecoverEnergy", 0f, .5f);
-        InvokeRepeating("DrainEnergy", 0f, 1f);
+        InvokeRepeating("DrainEnergy", 0f, energyDrainSpeed);
+        InvokeRepeating("RecoverEnergy", 0f, energyRecoverySpeed);
     }
 
     void FixedUpdate () {
@@ -55,6 +61,10 @@ public class PlayerController : MonoBehaviour {
         } else {
             shieldActive = false;
             shield.SetActive(false);
+
+            // Move the shield super far off screen to prevent the issue 
+            // where it would deflect bullets in it's old position for 
+            // one frame when it respawned
             shield.transform.position = new Vector3(1000f, 1000f, 0);
         }
 
