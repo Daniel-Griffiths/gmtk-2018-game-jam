@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public GameObject bullet;
-    private GameObject player;
-    private GameObject shield;
+    protected GameObject player;
+    protected GameObject shield;
 
     public Sprite[] sprites;
     public int health = 3;
@@ -15,24 +15,13 @@ public class EnemyController : MonoBehaviour {
     public bool lookAtPlayer = false;
 
     // Use this for initialization
-    void Start () {
+    protected void Start () {
         player = GameObject.FindGameObjectWithTag("Player"); 
-        InvokeRepeating("SpawnBullet", 0.0f, rateOfFire);
+        InvokeRepeating("Fire", 0.0f, rateOfFire);
         RandomSprite();
     }
 
-    void RandomSprite()
-    {
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0,sprites.Length)];
-    }
-
-    void SpawnBullet()
-    {
-        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        newBullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-5f, 5f), -30f));
-    }
-
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if(player != null) {        
             if (lookAtPlayer) {
@@ -43,7 +32,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         // Yes, using the color is a really stupid idea
         if (collision.transform.tag == "Bullet" && collision.transform.GetComponent<SpriteRenderer>().color == Color.magenta) {
@@ -51,14 +40,28 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    void FollowPlayer()
+    protected void RandomSprite()
+    {
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+    }
+
+    protected virtual void Fire()
+    {
+        Vector2 bulletPosition = new Vector2(Random.Range(-5f, 5f), -30f);
+
+        Instantiate(bullet, transform.position, Quaternion.identity)
+            .GetComponent<Rigidbody2D>()
+            .AddForce(bulletPosition);
+    }
+
+    protected void FollowPlayer()
     {
         float movementDistance = followSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, 
            new Vector3(Random.Range(player.transform.position.x - 1f, player.transform.position.x + 1f), player.transform.position.y + .7f, player.transform.position.z), movementDistance);
-    }    
+    }
 
-    void DestroyEnemy()
+    protected void DestroyEnemy()
     {
         health--;
         if(health <= 0) {

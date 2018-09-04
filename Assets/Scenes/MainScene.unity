@@ -326,7 +326,7 @@ RectTransform:
   - {fileID: 223823968}
   - {fileID: 345557709}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -826,7 +826,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &878140637
 SpriteRenderer:
@@ -968,7 +968,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4786929382503758, guid: 5ae69cb7eaaa2d44dbe1dc364095d08f, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114828293365849214, guid: 5ae69cb7eaaa2d44dbe1dc364095d08f,
         type: 2}
@@ -1015,7 +1015,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4255763788382722, guid: fad63465e2008664d845de6f36e4e78e, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114207626335200958, guid: fad63465e2008664d845de6f36e4e78e,
         type: 2}
@@ -1095,6 +1095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 345557708}
   enemy: {fileID: 1221419035382834, guid: cfe05f918e6b3734d9d7a835cf7a4705, type: 2}
+  boss: {fileID: 1471843549156262, guid: 30f4163d800e3e748a9a3b01e340d540, type: 2}
   mainCamera: {fileID: 519420028}
   gameHasEnded: 0
   deathSound: {fileID: 8300000, guid: 66213d315e8e0964eb7aa0524c240642, type: 3}

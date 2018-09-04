@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     // Gameobjects
     public GameObject menu;
     public GameObject enemy;
+    public GameObject boss;
     public GameObject mainCamera;
 
     // Misc
@@ -46,10 +47,17 @@ public class GameManager : MonoBehaviour
     void SpawnEnemies()
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length < 3) {
-            GameObject newEnemy = Instantiate(enemy);
-            newEnemy.transform.position = new Vector2(Random.Range
-                (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x), 1f);
 
+            // spawn a boss every 20 enemies
+            if (score > 0 && (score % 20) == 0) {
+                GameObject newEnemy = Instantiate(boss);
+                newEnemy.transform.position = new Vector2(Random.Range
+                 (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x), 1f);
+            } else {
+                GameObject newEnemy = Instantiate(enemy);
+                newEnemy.transform.position = new Vector2(Random.Range
+                 (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x), 1f);
+            }
         }
     }
 
