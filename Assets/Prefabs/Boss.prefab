@@ -82,7 +82,7 @@ MonoBehaviour:
   bullet: {fileID: 1751003784717582, guid: 58c499eaa3ef1da4fbf72ae17ae0f5a2, type: 2}
   sprites:
   - {fileID: 21300000, guid: fb6763b6e51d3784089030b6240d60f7, type: 3}
-  health: 20
+  health: 50
   rateOfFire: 0.2
   followSpeed: 0.5
   lookAtPlayer: 0
