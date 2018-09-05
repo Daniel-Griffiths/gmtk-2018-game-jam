@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     private float horizontal;
     private int lives = 10;
     private Explodable _explodable;
+    private SpriteRenderer shieldSprite;
 
     private float speed = 1.5f;
     private bool shieldActive = false;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
         shield = GameObject.FindGameObjectWithTag("Shield");
+        shieldSprite = shield.GetComponent<SpriteRenderer>();
         _explodable = GetComponent<Explodable>();
 
         livesText.text = "Health: " + lives.ToString();
@@ -75,6 +77,10 @@ public class PlayerController : MonoBehaviour {
             shield.SetActive(false);
         }
 
+        // Update shield color
+        float opacity = Mathf.Clamp(0.2f * (float)energy, .4f, 1f);
+        shieldSprite.color = new Color(0f, 171f / 255, 1f, opacity);
+
         UpdateText();
     }
 
@@ -103,7 +109,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateText()
-    {
+    { 
         if (energy > 5) {
             energyText.color = Color.white;
         }
@@ -115,7 +121,7 @@ public class PlayerController : MonoBehaviour {
 
         if (energy < 4) {
             PlayEnergyWarning();
-            energyText.color = Color.red;            
+            energyText.color = Color.red;
         }
 
         if (lives < 6) {
