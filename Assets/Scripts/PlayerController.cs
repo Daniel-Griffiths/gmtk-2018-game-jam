@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
     private int energy = 10;
     private int energyMax = 10;
     private float energyDrainSpeed = 1f;
-    private float energyRecoverySpeed = 1f;
+    private float energyRecoverySpeed = 0.75f;
 
     // Gui
     public Text livesText;
