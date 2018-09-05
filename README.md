@@ -6,6 +6,6 @@ while it recharges.
 
 This is also the first game I have ever made in Unity. As you would expect, the code quality is rushed and not very good. But I thought it would be worth uploading for anyone who is curious. 
 
-You can play the game online here: https://danielgriffiths.itch.io/shieldshot 
+You can play the game online here: https://danielgriffiths.itch.io/shieldshot (this build is from the time of the game jam)
 
 ![Gameplay](/screenshot.gif)
