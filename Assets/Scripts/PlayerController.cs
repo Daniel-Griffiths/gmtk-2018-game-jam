@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     private float vertical;
     private float horizontal;
     private int lives = 10;
+    private Explodable _explodable;
 
     private float speed = 1.5f;
     private bool shieldActive = false;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
         shield = GameObject.FindGameObjectWithTag("Shield");
+        _explodable = GetComponent<Explodable>();
 
         livesText.text = "Health: " + lives.ToString();
         energyText.text = "Energy: " + energy.ToString();
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (lives <= 0) {
-            Destroy(gameObject);
+            _explodable.explode();
             gameManager.GameOver();
         }
     }

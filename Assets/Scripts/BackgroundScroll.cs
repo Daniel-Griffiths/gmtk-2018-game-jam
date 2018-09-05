@@ -5,8 +5,8 @@ using UnityEngine;
 public class BackgroundScroll : MonoBehaviour {
 
     private Vector3 initialTransform;
-    private const float scrollOffset = -4.08f;
     public float scrollSpeed = 0.02f;
+    private const float scrollOffset = -4.08f;
 
 	// Use this for initialization
 	void Start () {
