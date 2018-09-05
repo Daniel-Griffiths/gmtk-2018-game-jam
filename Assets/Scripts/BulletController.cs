@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     private SpriteRenderer sprite;
     private const float bulletLifetime = 4f;
     private const int bulletCollisionLayer = 8;
-    private const float bulletReflectionSpeed = 55f;
+    private const float bulletReflectionSpeed = 65f;
 
     void Start()
     {
