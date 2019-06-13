@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBossController : EnemyController {
-    protected void Fire()
+    protected override void Fire()
     {
         Instantiate(bullet, transform.position, Quaternion.identity)
             .GetComponent<Rigidbody2D>()
